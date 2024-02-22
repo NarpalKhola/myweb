@@ -1,0 +1,131 @@
+<!DOCTYPE html> 
+<!-- The doctype declaration tells the browser the version of HTML that the document is written in. -->
+<html lang="en">
+<!-- The <html> element is the root element of an HTML page, and indicates that the page is written in HTML. -->
+<head>
+    <meta charset="UTF-8">
+    <!-- The <meta> element provides metadata about the HTML document, such as character encoding. -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- This meta tag tells Internet Explorer to use the latest version of the rendering engine. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- The viewport meta tag specifies how the website should be scaled on different devices. -->
+    <title>HTML form to Google Sheet</title>
+ <style>
+	div {
+  background-color: lightgrey;
+  width: 200px;
+  border: 10px solid green;
+  padding: 10px;
+    margin-left: auto;
+  margin-right: auto;
+  
+}
+		
+#loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid blue;
+  border-bottom: 16px solid blue;
+  width: 60px;
+  height: 60px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+  visibility:hidden;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+	
+    </style>
+    <!-- The title element defines the title of the document, which is displayed in the browser's title bar. -->
+</head>
+ 
+        
+<body>
+    <h1 id="msg" align="center"></h1>
+    <!-- The <h1> element defines a heading. The id attribute creates a unique identifier for the element. -->
+    <form>
+  <div align="center" style="width: 1011px; height: 490px">
+        
+        <font color="#00FF00">
+    
+        
+        <input type="text" name="name"  placeholder='Name' required id="123" onkeyup="return 123_onkeyup()" onclick="return 123_onclick()"> </font><br><br>
+        <!-- The <input> element is a form control element that allows the user to input data. -->
+        <input type="email" name="email" placeholder='Email'><br><br>
+		<input type="tel" name="phone" placeholder='Phone'><br><br>
+		<input type="text" name="father" placeholder='father'><br>&nbsp;<p>
+		
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <!-- The <input type="submit"> element creates a submit button. The id attribute creates a unique identifier for the element. -->
+    	</p>
+		<p>
+            <input id="Button1" type="button" value="button" onclick="return Button1_onclick()" /></p>
+		<div id="loader"></div>
+		&nbsp;<p>
+		<font size="3">
+		<input type="submit" id="sub"style="font-size: 12pt"></font></p>
+			<p>&nbsp;</p>
+			</p>
+		<p align="center">
+		
+		<select size="1.5" name="D1" style ="font-size: 12pt">
+		<option selected>vijay kumar</option>
+		<option>Narpal Singh</option>
+		</select></p>
+			<p align="center">
+
+    </form>
+    <script>
+    
+        let form = document.querySelector("form");
+        // The document.querySelector() method returns the first element that matches a specified CSS selector.
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            // The preventDefault() method stops the form from submitting and prevents the page from refreshing.
+            document.querySelector("#sub").value = "Submiting..";
+            document.querySelector("#loader").style.visibility = "visible";
+            // Change the value of the submit button to "Submitting..." while the form is being submitted.
+            let data = new FormData(form);
+            // The FormData() method creates a new FormData object that contains the values of all the form fields.
+            fetch('https://script.google.com/macros/s/AKfycbyMu-bNGN92VdVirmjyVt3trO7RmAS026bnrYl2OUJ8yJjeei5-PjUTIwMWeUOjH5qC/exec', {
+                    method: "POST",
+                    body: data
+                })
+                // The fetch() method is used to make a request to the server and retrieve data.
+                // This is an example API endpoint. Replace it with the actual URL for the API endpoint you want to use.
+                .then(res => res.text())
+                // The .then() method is used to handle the response from the server.
+                // The response is converted to text using the res.text() method.
+                .then(data => {
+                    document.querySelector("#msg").innerHTML = data;
+                    // The innerHTML property sets or returns the HTML content of an element.
+                    // Here, we are setting the content of the <h1> element to the response from the server.
+                    document.querySelector("#sub").value = "Submit"
+                             setTimeout(function(){
+   window.location.reload(1);
+}, 500);      
+        })
+        
+        
+                    // Change the value of the submit button back to "Submit" after the form has been submitted.
+                }); 
+               
+                
+  
+function Button1_onclick() {
+document.getElementById("123").value =Date
+}
+
+    </script>
+    
+</body>
+ 
+</html>
